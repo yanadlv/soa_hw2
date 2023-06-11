@@ -20,6 +20,7 @@ class MafiaServicer(server_pb2_grpc.MafiaServiceServicer):
         self.mutex.acquire()
         self.connected_players.append(username)
         self.notifications.append(f"{username} joined the game\n")
+        print(f"LOG_INFO: {self.notifications[-1]}")
         self.mutex.release()
 
         response = server_pb2.SetUsernameResponse(message=f"\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
@@ -33,6 +34,7 @@ class MafiaServicer(server_pb2_grpc.MafiaServiceServicer):
         self.mutex.acquire()
         self.connected_players.remove(username)
         self.notifications.append(f"{username} left the game\n")
+        print(f"LOG_INFO: {self.notifications[-1]}")
         self.mutex.release()
 
         response = server_pb2.QuitResponse(message=f"\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
@@ -45,9 +47,9 @@ class MafiaServicer(server_pb2_grpc.MafiaServiceServicer):
         return response
 
     async def SubscribeToNotifications(self, request, context):
-        notification_number = 0
+        notification_number = len(self.notifications)
         while True:
-            await asyncio.sleep(1)
+            await asyncio.sleep(0.5)
             while notification_number < len(self.notifications):
                 notification = server_pb2.PlayerNotification(message=self.notifications[notification_number])
                 yield notification
