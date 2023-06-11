@@ -1,0 +1,9 @@
+FROM python:3.9
+
+RUN pip install grpcio
+
+COPY server.py .
+COPY proto/server_pb2.py .
+COPY proto/server_pb2_grpc.py .
+
+CMD ["python3", "server.py"]
