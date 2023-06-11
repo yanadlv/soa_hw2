@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+service MafiaService {
+  rpc SetUsername(SetUsernameRequest) returns (SetUsernameResponse) {}
+  rpc QuitGame(QuitRequest) returns (QuitResponse) {}
+  rpc GetConnectedPlayers(GetConnectedPlayersRequest) returns (GetConnectedPlayersResponse) {}
+  rpc SubscribeToNotifications(SubscribeToNotificationsRequest) returns (stream PlayerNotification) {}
+}
+
+message SetUsernameRequest {
+  string username = 1;
+}
+
+message SetUsernameResponse {
+  string message = 1;
+}
+
+message QuitRequest {
+  string username = 1;
+}
+
+message QuitResponse {
+  string message = 1;
+}
+
+message GetConnectedPlayersRequest {}
+
+message GetConnectedPlayersResponse {
+  repeated string players = 1;
+}
+
+message SubscribeToNotificationsRequest {}
+
+message PlayerNotification {
+  string message = 1;
+}
