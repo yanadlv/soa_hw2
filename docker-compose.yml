@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile_server
+    ports:
+      - "9000:9000"
+
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile_client
+    depends_on:
+      - server
