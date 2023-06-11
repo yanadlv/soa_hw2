@@ -1,6 +1,6 @@
 FROM python:3.9
 
-RUN pip install grpcio
+RUN pip install grpcio grpcio-tools
 
 COPY server.py .
 COPY proto/server_pb2.py .
