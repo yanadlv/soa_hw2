@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+service MafiaService {
+  rpc SetUsername(SetUsernameRequest) returns (SetUsernameResponse) {}
+  rpc GetConnectedPlayers(GetConnectedPlayersRequest) returns (GetConnectedPlayersResponse) {}
+  rpc SubscribeToNotifications(SubscribeToNotificationsRequest) returns (stream PlayerNotification) {}
+  rpc SendMessage(SendMessageRequest) returns (SendMessageResponse) {}
+  rpc GetRepliesCount(GetRepliesCountRequest) returns (GetRepliesCountResponse) {}
+  rpc MorningAfter(MorningAfterRequest) returns (MorningAfterResponse) {}
+  rpc Voted(VotedRequest) returns (VotedResponse) {}
+  rpc Role(RoleRequest) returns (RoleResponse) {}
+  rpc New(NewRequest) returns (NewResponse) {}
+}
+
+message SetUsernameRequest {
+  string username = 1;
+}
+
+message SetUsernameResponse {
+  string message = 1;
+}
+
+message GetConnectedPlayersRequest {}
+
+message GetConnectedPlayersResponse {
+  repeated string players = 1;
+}
+
+message SubscribeToNotificationsRequest {}
+
+message PlayerNotification {
+  string message = 1;
+}
+
+message SendMessageRequest {
+  string username = 1;
+  string message = 2;
+}
+
+message SendMessageResponse {
+  string message = 1;
+}
+
+message GetRepliesCountRequest {}
+
+message GetRepliesCountResponse {
+  int32 replies_count = 1;
+}
+
+message MorningAfterRequest {}
+
+message MorningAfterResponse {
+  string message = 1;
+}
+
+message VotedRequest {}
+
+message VotedResponse {
+  string message = 1;
+}
+
+message RoleRequest {
+  string username = 1;
+}
+
+message RoleResponse {
+  string message = 1;
+}
+
+message NewRequest {}
+
+message NewResponse {
+  string message = 1;
+}
