@@ -1,9 +1,0 @@
-FROM python:3.9
-
-RUN pip install grpcio grpcio-tools
-
-COPY client.py .
-COPY proto/server_pb2.py ./proto
-COPY proto/server_pb2_grpc.py ./proto
-
-CMD ["python3", "client.py"]
